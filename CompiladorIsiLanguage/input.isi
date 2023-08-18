@@ -1,0 +1,8 @@
+programa
+    leia(a);
+
+    escreva(a);
+
+    f := n;
+
+fimprog;
