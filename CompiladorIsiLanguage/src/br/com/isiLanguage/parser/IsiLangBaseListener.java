@@ -5,7 +5,15 @@ package br.com.isiLanguage.parser;
     import br.com.isiLanguage.dataStructures.IsiVariable;
     import br.com.isiLanguage.dataStructures.IsiSymbolTable;
     import br.com.isiLanguage.exceptions.IsiSemanticException;
+    import br.com.isiLanguage.ast.IsiProgram;
+    import br.com.isiLanguage.ast.AbstractCommand;
+    import br.com.isiLanguage.ast.CommandLeitura;
+    import br.com.isiLanguage.ast.CommandEscrita;
+    import br.com.isiLanguage.ast.CommandAtribuicao;
+    import br.com.isiLanguage.ast.CommandDecisao;
 
+    import java.util.ArrayList;
+    import java.util.Stack;
 
 
 import org.antlr.v4.runtime.ParserRuleContext;
@@ -91,6 +99,18 @@ public class IsiLangBaseListener implements IsiLangListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitCmd(IsiLangParser.CmdContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterCmdselecao(IsiLangParser.CmdselecaoContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitCmdselecao(IsiLangParser.CmdselecaoContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

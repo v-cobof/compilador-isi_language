@@ -32,7 +32,11 @@ public class MainClass {
 
             parser.prog();
 
-            System.out.println("Dando inicio a compilação.");
+            System.out.println("Compilação bem sucedida");
+
+            parser.exibeComandos();
+
+            parser.generateCode();
 
         }
         catch(IsiSemanticException ex){

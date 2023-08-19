@@ -3,10 +3,14 @@ programa
     declare numero f, k;
     declare texto ts, t1;
 
-    leia(a);
+    leia(f);
+    leia(t1);
 
-    escreva(a);
-
-
+    se (f > 2){
+        escreva(f);
+    }
+    senao{
+        escreva(t1);
+    }
 
 fimprog;

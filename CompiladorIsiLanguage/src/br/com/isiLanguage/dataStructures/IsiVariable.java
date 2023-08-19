@@ -14,6 +14,34 @@ public class IsiVariable extends IsiSymbol {
         this.value = value;
     }
 
+    public int getType() {
+        return type;
+    }
+
+    public void setType(int type) {
+        this.type = type;
+    }
+
+    public String getValue() {
+        return value;
+    }
+
+    public void setValue(String value) {
+        this.value = value;
+    }
+
+    @Override
+    public String generateJavaCode() {
+        String str;
+        if (type == NUMBER) {
+            str = "double ";
+        }
+        else {
+            str = "String ";
+        }
+        return str + " "+super.name+";";
+    }
+
     @Override
     public String toString(){
         return "Variavel: " + name + ", tipo = " + this.type + ", valor = " + this.value ;
