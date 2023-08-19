@@ -1,8 +1,12 @@
 programa
+
+    declare numero f, k;
+    declare texto ts, t1;
+
     leia(a);
 
     escreva(a);
 
-    f := n;
+
 
 fimprog;

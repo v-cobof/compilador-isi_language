@@ -1,10 +1,10 @@
 package br.com.isiLanguage.main;
 
-import org.antlr.v4.runtime.CharStreams;
-import org.antlr.v4.runtime.CommonTokenStream;
-
+import br.com.isiLanguage.exceptions.IsiSemanticException;
 import br.com.isiLanguage.parser.IsiLangLexer;
 import br.com.isiLanguage.parser.IsiLangParser;
+import org.antlr.v4.runtime.CharStreams;
+import org.antlr.v4.runtime.CommonTokenStream;
 
 // rodar o antlr
 // java -cp "C:\Users\victor.figueiro_fina\Desktop\fac\compiladores\compilador-isi_language\CompiladorIsiLanguage\antlr-4.13.0-complete.jar" org.antlr.v4.Tool IsiLang.g4 -package br.com.isiLanguage.parser -o ./src/br/com/isiLanguage/parser
@@ -35,9 +35,12 @@ public class MainClass {
             System.out.println("Dando inicio a compilação.");
 
         }
+        catch(IsiSemanticException ex){
+            System.err.println("Semantic error - " + ex.getMessage());
+        }
         catch(Exception ex) {
             ex.printStackTrace();
-            System.err.println("ERROR "+ex.getMessage());
+            System.err.println("ERROR " + ex.getMessage());
         }
     }
 }
