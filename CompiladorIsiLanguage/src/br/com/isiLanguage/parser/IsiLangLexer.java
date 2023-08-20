@@ -154,6 +154,14 @@ public class IsiLangLexer extends Lexer {
 	        variable.incrementarVezesUsada();
 	    }
 
+	    public void verificaSeVariavelTemValor(String id){
+	        IsiVariable var = (IsiVariable) symbolTable.get(id);
+
+	        if (var.getValue() == null){
+	            throw new IsiSemanticException("A variável " + var.getName() + " deve possuir um valor antes de ser usada");
+	        }
+	    }
+
 	    public void gerarWarnings(){
 
 	        ArrayList<IsiSymbol> symbols = symbolTable.getAll();

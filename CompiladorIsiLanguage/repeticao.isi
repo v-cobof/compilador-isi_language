@@ -1,9 +1,22 @@
 programa
 
+
+
     declare numero a, b, c, d.
+
+    leia(a).
+    leia(b).
+
+    enquanto (a > b)
+    {
+        escreva (a).
+        a := a+1.
+    }
 
     a := 0.
     b := 5.
+
+    c := 4.5 + 3 / 7.897.
 
     leia(c).
 
@@ -12,11 +25,7 @@ programa
 
     escreva(c).
 
-    enquanto (a > b)
-    {
-        escreva (a).
-        a := a+1.
-    }
+    leia(d).
 
     faca {
         escreva (a).

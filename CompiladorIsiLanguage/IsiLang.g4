@@ -68,6 +68,14 @@ grammar IsiLang;
         variable.incrementarVezesUsada();
     }
 
+    public void verificaSeVariavelTemValor(String id){
+        IsiVariable var = (IsiVariable) symbolTable.get(id);
+
+        if (var.getValue() == null){
+            throw new IsiSemanticException("A variável " + var.getName() + " deve possuir um valor antes de ser usada");
+        }
+    }
+
     public void gerarWarnings(){
 
         ArrayList<IsiSymbol> symbols = symbolTable.getAll();
@@ -134,9 +142,16 @@ cmd		:  cmdleitura { System.out.println("Reconheci leitura"); }
 		;
 
 cmdselecao  :   'se' AP
-                     ID  { _exprDecision = _input.LT(-1).getText(); }
+                     ID  {
+                     verificaId(_input.LT(-1).getText());
+                     verificaSeVariavelTemValor(_input.LT(-1).getText());
+                     _exprDecision = _input.LT(-1).getText();
+                     }
                      OPREL { _exprDecision += _input.LT(-1).getText(); }
-                     (ID | NUMBER) { _exprDecision += _input.LT(-1).getText(); }
+                     (ID {
+                     verificaId(_input.LT(-1).getText());
+                     verificaSeVariavelTemValor(_input.LT(-1).getText());
+                     } | NUMBER) { _exprDecision += _input.LT(-1).getText(); }
                      FP
                      ACH
                      {
@@ -185,6 +200,7 @@ cmdescrita	: 'escreva' AP
                             stack.peek().add(cmd);
                         }
                         | ID { verificaId(_input.LT(-1).getText());
+                               verificaSeVariavelTemValor(_input.LT(-1).getText());
                              _writeId = _input.LT(-1).getText();
 
                              CommandEscrita cmd = new CommandEscrita(_writeId);
@@ -202,6 +218,7 @@ cmdescritaNaLinha	: 'escrevaNaLinha' AP
                             stack.peek().add(cmd);
                         }
                         | ID { verificaId(_input.LT(-1).getText());
+                               verificaSeVariavelTemValor(_input.LT(-1).getText());
                              _writeId = _input.LT(-1).getText();
 
                              CommandEscritaNaLinha cmd = new CommandEscritaNaLinha(_writeId);
@@ -230,9 +247,13 @@ cmdattrib   : ID { verificaId(_input.LT(-1).getText());
 
 cmdEnquanto  :  'enquanto'
                  AP
-                 ID { _exprDecision = _input.LT(-1).getText(); }
+                 ID {
+                 verificaId(_input.LT(-1).getText());
+                 verificaSeVariavelTemValor(_input.LT(-1).getText());
+                 _exprDecision = _input.LT(-1).getText(); }
                  OPREL { _exprDecision += _input.LT(-1).getText(); }
-                 (ID | NUMBER) {_exprDecision += _input.LT(-1).getText(); }
+                 (ID { verificaId(_input.LT(-1).getText());
+                       verificaSeVariavelTemValor(_input.LT(-1).getText()); } | NUMBER) {_exprDecision += _input.LT(-1).getText(); }
                  FP
                  ACH
                  {
@@ -260,9 +281,15 @@ cmdFacaEnquanto  : 'faca'
                  FCH
                  'enquanto'
                  AP
-                 ID { _exprDecision = _input.LT(-1).getText(); }
+                 ID {
+                 verificaId(_input.LT(-1).getText());
+                 verificaSeVariavelTemValor(_input.LT(-1).getText());
+                 _exprDecision = _input.LT(-1).getText(); }
                  OPREL { _exprDecision += _input.LT(-1).getText(); }
-                 (ID | NUMBER) {_exprDecision += _input.LT(-1).getText(); }
+                 (ID {
+                 verificaId(_input.LT(-1).getText());
+                 verificaSeVariavelTemValor(_input.LT(-1).getText());
+                 } | NUMBER) {_exprDecision += _input.LT(-1).getText(); }
                  FP
                  {
                    lista = stack.pop();
@@ -280,6 +307,7 @@ expr        : termo  (
             ;
 
 termo       : ID {  verificaId(_input.LT(-1).getText());
+                    verificaSeVariavelTemValor(_input.LT(-1).getText());
                     _exprContent += _input.LT(-1).getText();
                 }
 
