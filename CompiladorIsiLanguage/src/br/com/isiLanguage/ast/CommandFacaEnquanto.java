@@ -2,12 +2,12 @@ package br.com.isiLanguage.ast;
 
 import java.util.ArrayList;
 
-public class CommandEnquanto extends AbstractCommand {
+public class CommandFacaEnquanto extends AbstractCommand {
 
     private String condition;
     private ArrayList<AbstractCommand> lista;
 
-    public CommandEnquanto(String condition, ArrayList<AbstractCommand> lista) {
+    public CommandFacaEnquanto(String condition, ArrayList<AbstractCommand> lista) {
         this.condition = condition;
         this.lista = lista;
     }
@@ -16,7 +16,7 @@ public class CommandEnquanto extends AbstractCommand {
     public String generateJavaCode() {
         StringBuilder sb = new StringBuilder();
 
-        sb.append("\nwhile(").append(condition).append("){\n");
+        sb.append("do {\n");
 
         for(AbstractCommand v: this.lista)
         {
@@ -24,6 +24,10 @@ public class CommandEnquanto extends AbstractCommand {
         }
 
         sb.append("\n}");
+
+        sb.append("while(").append(condition).append(");\n");
+
         return sb.toString();
     }
+
 }

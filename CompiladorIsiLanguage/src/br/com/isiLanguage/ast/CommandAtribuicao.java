@@ -14,20 +14,6 @@ public class CommandAtribuicao extends AbstractCommand {
         this.expr = expr;
     }
 
-    private void validarNumero(String expr, IsiVariable variable) {
-
-        if (expr.contains("+") ||
-            expr.contains("-") ||
-            expr.contains("*") ||
-            expr.contains("/")) {
-
-
-        }
-
-        if (!isNumber(variable.getValue())){
-
-        }
-    }
 
     @Override
     public String generateJavaCode() {
@@ -37,24 +23,5 @@ public class CommandAtribuicao extends AbstractCommand {
     @Override
     public String toString() {
         return "CommandAtribuicao [id=" + id + ", expr=" + expr + "]";
-    }
-
-    private boolean isNumber(String valor){
-        try{
-            Double.parseDouble(valor);
-            return true;
-        }catch(Exception ex) {
-            return false;
-        }
-    }
-
-    private boolean isString(String valor){
-        int count = 0;
-        for (char c : valor.toCharArray()) {
-            if (c == '"') {
-                count++;
-            }
-        }
-        return count == 2;
     }
 }

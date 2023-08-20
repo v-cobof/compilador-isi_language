@@ -6,6 +6,14 @@ import br.com.isiLanguage.parser.IsiLangParser;
 import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;
 
+/*
+    TODO
+    print sem pular linha
+
+    warnings
+ */
+
+
 // rodar o antlr
 // java -cp "C:\Users\victor.figueiro_fina\Desktop\fac\compiladores\compilador-isi_language\CompiladorIsiLanguage\antlr-4.13.0-complete.jar" org.antlr.v4.Tool IsiLang.g4 -package br.com.isiLanguage.parser -o ./src/br/com/isiLanguage/parser
 

@@ -1,14 +1,23 @@
 programa
 
-    declare numero a, b.
+    declare numero a, b, c.
 
     a := 0.
     b := 5.
+
+    c := 1 + 4.
+
+    escreva(c).
 
     enquanto (a > b)
     {
         escreva (a).
         a := a+1.
     }
+
+    faca {
+        escreva (a).
+        a := a+1.
+    } enquanto (a > b).
 
 fimprog.

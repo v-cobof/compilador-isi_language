@@ -13,6 +13,7 @@ grammar IsiLang;
     import br.com.isiLanguage.ast.CommandAtribuicao;
     import br.com.isiLanguage.ast.CommandDecisao;
     import br.com.isiLanguage.ast.CommandEnquanto;
+    import br.com.isiLanguage.ast.CommandFacaEnquanto;
 
     import java.util.ArrayList;
     import java.util.Stack;
@@ -62,6 +63,14 @@ grammar IsiLang;
         }
     }
 
+    public void verificaVariavelSemValor(String id){
+        IsiVariable variable = (IsiVariable) symbolTable.get(id);
+
+        if (variable.getValue() == null){
+            System.out.println("WARNING - A variável " + id + " não possui valor definido.");
+        }
+    }
+
     public void exibeComandos(){
         for (AbstractCommand c: program.getComandos()){
             System.out.println(c);
@@ -104,6 +113,7 @@ cmd		:  cmdleitura { System.out.println("Reconheci leitura"); }
         |  cmdattrib  { System.out.println("Reconheci atribuição"); }
         |  cmdselecao
         |  cmdEnquanto
+        |  cmdFacaEnquanto
 		;
 
 cmdselecao  :   'se' AP
@@ -177,24 +187,50 @@ cmdattrib   : ID { verificaId(_input.LT(-1).getText());
               }
             ;
 
-cmdEnquanto  :  'enquanto' AP
+cmdEnquanto  :  'enquanto'
+                 AP
                  ID { _exprDecision = _input.LT(-1).getText(); }
                  OPREL { _exprDecision += _input.LT(-1).getText(); }
                  (ID | NUMBER) {_exprDecision += _input.LT(-1).getText(); }
                  FP
                  ACH
                  {
-                 	 curThread = new ArrayList<AbstractCommand>();
-                     ArrayList<AbstractCommand> lista = new ArrayList<AbstractCommand>();
-                     stack.push(curThread);
+                   curThread = new ArrayList<AbstractCommand>();
+                   ArrayList<AbstractCommand> lista = new ArrayList<AbstractCommand>();
+                   stack.push(curThread);
                  }
                  (cmd)+
                  FCH
                  {
-                       lista = stack.pop();
-                       CommandEnquanto cmd = new CommandEnquanto(_exprDecision, lista);
-                       stack.peek().add(cmd);
-                 };
+                   lista = stack.pop();
+                   CommandEnquanto cmd = new CommandEnquanto(_exprDecision, lista);
+                   stack.peek().add(cmd);
+                 }
+                 ;
+
+cmdFacaEnquanto  : 'faca'
+                 ACH
+                 {
+                   curThread = new ArrayList<AbstractCommand>();
+                   ArrayList<AbstractCommand> lista = new ArrayList<AbstractCommand>();
+                   stack.push(curThread);
+                 }
+                 (cmd)+
+                 FCH
+                 'enquanto'
+                 AP
+                 ID { _exprDecision = _input.LT(-1).getText(); }
+                 OPREL { _exprDecision += _input.LT(-1).getText(); }
+                 (ID | NUMBER) {_exprDecision += _input.LT(-1).getText(); }
+                 FP
+                 {
+                   lista = stack.pop();
+                   CommandFacaEnquanto cmd = new CommandFacaEnquanto(_exprDecision, lista);
+                   stack.peek().add(cmd);
+                 }
+                 PF
+                  ;
+
 
 expr        : termo  (
                 OP { _exprContent += _input.LT(-1).getText(); }
