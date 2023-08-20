@@ -7,6 +7,9 @@ programa
 
     c := 1 + 4.
 
+    escreva("pula linha").
+    escrevaNaLinha("não pula linha").
+
     escreva(c).
 
     enquanto (a > b)

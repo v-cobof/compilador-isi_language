@@ -1,7 +1,7 @@
 package br.com.isiLanguage.ast;
 
 public class CommandEscrita extends AbstractCommand {
-    private String id;
+    protected String id;
 
     public CommandEscrita(String id) {
         this.id = id;

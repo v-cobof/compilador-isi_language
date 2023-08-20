@@ -9,6 +9,8 @@ package br.com.isiLanguage.parser;
     import br.com.isiLanguage.ast.AbstractCommand;
     import br.com.isiLanguage.ast.CommandLeitura;
     import br.com.isiLanguage.ast.CommandEscrita;
+    import br.com.isiLanguage.ast.CommandEscritaNaLinha;
+    import br.com.isiLanguage.ast.CommandEscritaNaLinhaComTexto;
     import br.com.isiLanguage.ast.CommandEscritaComTexto;
     import br.com.isiLanguage.ast.CommandAtribuicao;
     import br.com.isiLanguage.ast.CommandDecisao;
@@ -138,6 +140,18 @@ public class IsiLangBaseListener implements IsiLangListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitCmdescrita(IsiLangParser.CmdescritaContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterCmdescritaNaLinha(IsiLangParser.CmdescritaNaLinhaContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitCmdescritaNaLinha(IsiLangParser.CmdescritaNaLinhaContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

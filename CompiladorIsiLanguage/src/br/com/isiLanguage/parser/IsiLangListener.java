@@ -9,6 +9,8 @@ package br.com.isiLanguage.parser;
     import br.com.isiLanguage.ast.AbstractCommand;
     import br.com.isiLanguage.ast.CommandLeitura;
     import br.com.isiLanguage.ast.CommandEscrita;
+    import br.com.isiLanguage.ast.CommandEscritaNaLinha;
+    import br.com.isiLanguage.ast.CommandEscritaNaLinhaComTexto;
     import br.com.isiLanguage.ast.CommandEscritaComTexto;
     import br.com.isiLanguage.ast.CommandAtribuicao;
     import br.com.isiLanguage.ast.CommandDecisao;
@@ -115,6 +117,16 @@ public interface IsiLangListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitCmdescrita(IsiLangParser.CmdescritaContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link IsiLangParser#cmdescritaNaLinha}.
+	 * @param ctx the parse tree
+	 */
+	void enterCmdescritaNaLinha(IsiLangParser.CmdescritaNaLinhaContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link IsiLangParser#cmdescritaNaLinha}.
+	 * @param ctx the parse tree
+	 */
+	void exitCmdescritaNaLinha(IsiLangParser.CmdescritaNaLinhaContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link IsiLangParser#cmdattrib}.
 	 * @param ctx the parse tree

@@ -1,7 +1,7 @@
 package br.com.isiLanguage.ast;
 
 public class CommandEscritaComTexto extends AbstractCommand {
-    private String content;
+    protected String content;
 
     public CommandEscritaComTexto(String content) {
         this.content = content;

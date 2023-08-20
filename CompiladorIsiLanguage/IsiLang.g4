@@ -9,6 +9,8 @@ grammar IsiLang;
     import br.com.isiLanguage.ast.AbstractCommand;
     import br.com.isiLanguage.ast.CommandLeitura;
     import br.com.isiLanguage.ast.CommandEscrita;
+    import br.com.isiLanguage.ast.CommandEscritaNaLinha;
+    import br.com.isiLanguage.ast.CommandEscritaNaLinhaComTexto;
     import br.com.isiLanguage.ast.CommandEscritaComTexto;
     import br.com.isiLanguage.ast.CommandAtribuicao;
     import br.com.isiLanguage.ast.CommandDecisao;
@@ -114,6 +116,7 @@ cmd		:  cmdleitura { System.out.println("Reconheci leitura"); }
         |  cmdselecao
         |  cmdEnquanto
         |  cmdFacaEnquanto
+        |  cmdescritaNaLinha
 		;
 
 cmdselecao  :   'se' AP
@@ -168,6 +171,23 @@ cmdescrita	: 'escreva' AP
                              _writeId = _input.LT(-1).getText();
 
                              CommandEscrita cmd = new CommandEscrita(_writeId);
+                             stack.peek().add(cmd);
+                        }
+                        )
+                        FP
+                        PF
+			;
+
+cmdescritaNaLinha	: 'escrevaNaLinha' AP
+                        (
+                        | TEXT {
+                            CommandEscritaNaLinhaComTexto cmd = new CommandEscritaNaLinhaComTexto(_input.LT(-1).getText());
+                            stack.peek().add(cmd);
+                        }
+                        | ID { verificaId(_input.LT(-1).getText());
+                             _writeId = _input.LT(-1).getText();
+
+                             CommandEscritaNaLinha cmd = new CommandEscritaNaLinha(_writeId);
                              stack.peek().add(cmd);
                         }
                         )
@@ -279,7 +299,7 @@ OP	: '+' | '-' | '*' | '/'
 ATTR : ':='
 	 ;
 
-TEXT    : '"' ([a-z]|[A-Z]|[0-9]|' '|'\t'|'!'|'-')* '"'
+TEXT    : ('"'.*?'"')
         ;
 
 ID	: [a-z] ([a-z] | [A-Z] | [0-9])*
