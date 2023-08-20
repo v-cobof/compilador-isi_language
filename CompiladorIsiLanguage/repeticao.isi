@@ -1,0 +1,14 @@
+programa
+
+    declare numero a, b.
+
+    a := 0.
+    b := 5.
+
+    enquanto (a > b)
+    {
+        escreva (a).
+        a := a+1.
+    }
+
+fimprog.

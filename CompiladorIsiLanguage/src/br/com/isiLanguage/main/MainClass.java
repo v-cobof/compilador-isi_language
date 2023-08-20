@@ -22,7 +22,7 @@ public class MainClass {
             IsiLangParser parser;
 
             // leio o arquivo "input.isi" e isso é entrada para o Analisador Lexico
-            lexer = new IsiLangLexer(CharStreams.fromFileName("C:\\Users\\victor.figueiro_fina\\Desktop\\fac\\compiladores\\compilador-isi_language\\CompiladorIsiLanguage\\input.isi"));
+            lexer = new IsiLangLexer(CharStreams.fromFileName("C:\\Users\\victor.figueiro_fina\\Desktop\\fac\\compiladores\\compilador-isi_language\\CompiladorIsiLanguage\\repeticao.isi"));
 
             // crio um "fluxo de tokens" para passar para o PARSER
             CommonTokenStream tokenStream = new CommonTokenStream(lexer);

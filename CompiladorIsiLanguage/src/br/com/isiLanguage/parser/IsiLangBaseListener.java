@@ -9,8 +9,10 @@ package br.com.isiLanguage.parser;
     import br.com.isiLanguage.ast.AbstractCommand;
     import br.com.isiLanguage.ast.CommandLeitura;
     import br.com.isiLanguage.ast.CommandEscrita;
+    import br.com.isiLanguage.ast.CommandEscritaComTexto;
     import br.com.isiLanguage.ast.CommandAtribuicao;
     import br.com.isiLanguage.ast.CommandDecisao;
+    import br.com.isiLanguage.ast.CommandEnquanto;
 
     import java.util.ArrayList;
     import java.util.Stack;
@@ -147,6 +149,18 @@ public class IsiLangBaseListener implements IsiLangListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitCmdattrib(IsiLangParser.CmdattribContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterCmdEnquanto(IsiLangParser.CmdEnquantoContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitCmdEnquanto(IsiLangParser.CmdEnquantoContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

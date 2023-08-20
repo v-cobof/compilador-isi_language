@@ -1,16 +1,24 @@
 programa
 
-    declare numero f, k;
-    declare texto ts, t1;
+    declare numero f, k.
+    declare texto ts, t1.
 
-    leia(f);
-    leia(t1);
+    leia(f).
+    leia(t1).
+
+    k := 1 + 2 - 5 / 6 * 8.
+
+    f := 123.
+
+    ts := "teste".
+    ts := 123.
 
     se (f > 2){
-        escreva(f);
+        escreva(f).
+        escreva("maior").
     }
     senao{
-        escreva(t1);
+        escreva("menor").
     }
 
-fimprog;
+fimprog.
