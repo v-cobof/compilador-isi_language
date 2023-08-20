@@ -8,6 +8,8 @@ public class IsiVariable extends IsiSymbol {
     private int type;
     private String value;
 
+    private int vezesUsada = 0;
+
     public IsiVariable(String name, int type, String value) {
         super(name);
         this.type = type;
@@ -45,5 +47,13 @@ public class IsiVariable extends IsiSymbol {
     @Override
     public String toString(){
         return "Variavel: " + name + ", tipo = " + this.type + ", valor = " + this.value ;
+    }
+
+    public int getVezesUsada() {
+        return vezesUsada;
+    }
+
+    public void incrementarVezesUsada() {
+        this.vezesUsada = this.vezesUsada + 1;
     }
 }

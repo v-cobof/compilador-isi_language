@@ -63,13 +63,27 @@ grammar IsiLang;
         if (!symbolTable.exists(id)){
             throw new IsiSemanticException("Simbolo "+id+" não foi declarado");
         }
+
+        IsiVariable variable = (IsiVariable) symbolTable.get(id);
+        variable.incrementarVezesUsada();
     }
 
-    public void verificaVariavelSemValor(String id){
-        IsiVariable variable = (IsiVariable) symbolTable.get(id);
+    public void gerarWarnings(){
 
-        if (variable.getValue() == null){
-            System.out.println("WARNING - A variável " + id + " não possui valor definido.");
+        ArrayList<IsiSymbol> symbols = symbolTable.getAll();
+
+        for(IsiSymbol symbol: symbols)
+        {
+            IsiVariable variable = (IsiVariable)symbol;
+
+            if(variable.getVezesUsada() == 0)
+            {
+                System.out.println("WARNING : A variável " + variable.getName() + " foi declarada mas nunca foi usada.");
+            }
+
+            if (variable.getValue() == null){
+                System.out.println("WARNING : A variável " + variable.getName() + " não possui valor definido.");
+            }
         }
     }
 
@@ -156,6 +170,9 @@ cmdleitura	: 'leia' AP
 
               {
                 IsiVariable var = (IsiVariable) symbolTable.get(_readId);
+
+                var.setValue("");
+
                 CommandLeitura cmd = new CommandLeitura(_readId, var);
                 stack.peek().add(cmd);
               }
@@ -203,6 +220,10 @@ cmdattrib   : ID { verificaId(_input.LT(-1).getText());
               PF
               {
                 CommandAtribuicao cmd = new CommandAtribuicao(_exprId, _exprContent);
+
+                IsiVariable variable = (IsiVariable) symbolTable.get(_exprId);
+                variable.setValue(_exprContent);
+
                 stack.peek().add(cmd);
               }
             ;

@@ -1,11 +1,11 @@
 programa
 
-    declare numero a, b, c.
+    declare numero a, b, c, d.
 
     a := 0.
     b := 5.
 
-    c := 1 + 4.
+    leia(c).
 
     escreva("pula linha").
     escrevaNaLinha("não pula linha").
@@ -21,6 +21,6 @@ programa
     faca {
         escreva (a).
         a := a+1.
-    } enquanto (a > b).
+    } enquanto (a > d).
 
 fimprog.

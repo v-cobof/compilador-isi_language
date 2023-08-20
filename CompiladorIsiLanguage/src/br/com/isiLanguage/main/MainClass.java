@@ -8,8 +8,6 @@ import org.antlr.v4.runtime.CommonTokenStream;
 
 /*
     TODO
-    print sem pular linha
-
     warnings
  */
 
@@ -45,6 +43,8 @@ public class MainClass {
             parser.exibeComandos();
 
             parser.generateCode();
+
+            parser.gerarWarnings();
 
         }
         catch(IsiSemanticException ex){

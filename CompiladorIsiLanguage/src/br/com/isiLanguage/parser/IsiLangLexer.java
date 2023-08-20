@@ -149,13 +149,27 @@ public class IsiLangLexer extends Lexer {
 	        if (!symbolTable.exists(id)){
 	            throw new IsiSemanticException("Simbolo "+id+" não foi declarado");
 	        }
+
+	        IsiVariable variable = (IsiVariable) symbolTable.get(id);
+	        variable.incrementarVezesUsada();
 	    }
 
-	    public void verificaVariavelSemValor(String id){
-	        IsiVariable variable = (IsiVariable) symbolTable.get(id);
+	    public void gerarWarnings(){
 
-	        if (variable.getValue() == null){
-	            System.out.println("WARNING - A variável " + id + " não possui valor definido.");
+	        ArrayList<IsiSymbol> symbols = symbolTable.getAll();
+
+	        for(IsiSymbol symbol: symbols)
+	        {
+	            IsiVariable variable = (IsiVariable)symbol;
+
+	            if(variable.getVezesUsada() == 0)
+	            {
+	                System.out.println("WARNING : A variável " + variable.getName() + " foi declarada mas nunca foi usada.");
+	            }
+
+	            if (variable.getValue() == null){
+	                System.out.println("WARNING : A variável " + variable.getName() + " não possui valor definido.");
+	            }
 	        }
 	    }
 
